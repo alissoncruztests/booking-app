@@ -7,9 +7,6 @@ import { FiX } from 'react-icons/fi'
 import { FaFacebook } from 'react-icons/fa'
 import { FcGoogle } from "react-icons/fc"
 
-import axios from 'axios'
-import { login } from "../../../services/auth";
-
 
 import './styles.css'
 
@@ -25,7 +22,8 @@ const ModalSignUp = ({setModalOpen}) => {
         const data = { username, password }
         console.log(data)
         const requestInfo = {
-            body: data,
+            method: "POST",
+            body: JSON.stringify(data),
             headers: {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
@@ -38,16 +36,17 @@ const ModalSignUp = ({setModalOpen}) => {
         }
         else {
             try {
-                const response = await axios.post('https://bookings-madein-pi.herokuapp.com/booking/v1/login', requestInfo )
+                await fetch('https://bookings-madein-pi.herokuapp.com/booking/v1/login', requestInfo )
                 .then(response => {
-                    if(response.ok) {
-                        return response.json()
-                    }
-                })
-                .then(token => console.log(token))
+                   response.json().then((result)=>{
+                       console.log("result", result)
 
-                login(response.data.token)
-                
+                       localStorage.setItem("login", JSON.stringify({
+                           
+                            token: result.token
+                       }))
+                   })
+                })
 
             } catch (err) {
                 message.warning({ content:"Houve um problema com o login, verifique suas credenciais. T.T"
