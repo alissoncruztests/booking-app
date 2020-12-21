@@ -4,10 +4,19 @@
 .main_image {
 
     position: absolute;
-    width: 550px;
+    width: 750px;
     height: 624px;
-    left: 708px;
-    top: 90px;
+    left: 1000px;
+    top: 190px;
+}
+
+.background {
+
+    position: absolute;
+    width: 1500px;
+    height: 900px;
+    left: -200px;
+    top: 10px;
 }
 .text_main {
     position: absolute;
