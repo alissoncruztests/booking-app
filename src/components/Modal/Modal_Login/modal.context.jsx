@@ -14,23 +14,23 @@ import './styles.css'
 
 const ModalSignUp = ({setModalOpen}) => {
         
-    const [ email, setEmail] = useState('')
+    const [ username, setUsername] = useState('')
     const [ password, setPassword ] = useState('')
   
     const handleLogin = async (e) => {
         e.preventDefault()
 
-        const data = {email, password }
+        const data = {username, password }
         const key = 'updatable';
 
-            if(email !== '' && password !== ''){
+            if(username !== '' && password !== ''){
                 try {
                     const response = await axios.post('https://bookings-madein-pi.herokuapp.com/booking/v1/login', data)
                     console.log(response.data)
                     console.log(response.statusText)
                     if(response.status === 200){
 
-                        message.info({ content: 'Usuário logado, tente com outro email.', key, duration: 2 })
+                        message.info({ content: 'Usuário logado.', key, duration: 4 })
                     }
                     else{
                         message.loading({ content: 'Loading...', key });
@@ -64,9 +64,9 @@ const ModalSignUp = ({setModalOpen}) => {
                 <h1>Entrar</h1>
                 <h4>Informe email e senha</h4>
                 
-                <input className="signup_email" type="text" placeholder="email" 
-                value={email}
-                onChange={ e => setEmail(e.target.value)} 
+                <input className="signup_email" type="text" placeholder="username" 
+                value={username}
+                onChange={ e => setUsername(e.target.value)} 
                 />
                 <input className="signup_password"type="text" placeholder="senha" 
                 value={password}
