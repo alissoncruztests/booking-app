@@ -34,25 +34,20 @@ const ModalRegister = ({setModalOpen}) => {
             try {
                 
                 await api.post('/booking/v1/user', data)
-                if (status === 200){
+               
                      message.loading({ content: 'Loading...', key });
                         setTimeout(() => {
-                        message.success({ content: 'Usuário cadastrado com sucesso.', key, duration: 3 });
-                    }, 1000);
+                            message.success({ content: 'Usuário cadastrado com sucesso.', key, duration: 3 });
+                        }, 1000);
 
                     setModalOpen(false)
-
-                }else {
-                    message.loading({ content: 'Loading...', key });
-                        setTimeout(() => {
-                        message.info({ content: 'Tente Novamente. Temos um usuario cadastrado no sistema com este e-mail.', key, duration: 3 });
-                    }, 1000);
-
-                }
                
-            }catch{
+            }catch {
 
-                message.warning({ content:'Erro, por favor tente novamente...', duration: 3 });
+                message.loading({ content: 'Loading...', key });
+                    setTimeout(() => {
+                        message.info({ content: 'Tente Novamente. Temos um usuario cadastrado no sistema com este e-mail.', key, duration: 5 });
+                    }, 1000);
             }
         }    
      
